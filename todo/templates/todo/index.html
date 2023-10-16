@@ -27,7 +27,7 @@
         <div class="card-body">
             <h5 class="card-title">{{ todo.todo_title }}</h5>
             {% if todo.todo_memo %}
-            <p class="card-text">{{ todo.todo_memo }}</p>
+            <p class="card-text text-truncate">{{ todo.todo_memo }}</p>
             {% else %}
             <p class="card-text">No info.</p>
             {% endif %}
