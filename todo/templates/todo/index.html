@@ -1,0 +1,49 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Todo 一覧{% endblock %}
+
+{% block content %}
+
+<!-- 追加フォーム -->
+<div class="d-flex justify-content-center my-3">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-auto">
+                {{ form.todo_title }}
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Todo一覧 -->
+{% if todo_list %}
+<div class="d-flex flex-wrap justify-content-start my-3">
+    {% for todo in todo_list %}
+    <div class="card m-2" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ todo.todo_title }}</h5>
+            {% if todo.todo_memo %}
+            <p class="card-text">{{ todo.todo_memo }}</p>
+            {% else %}
+            <p class="card-text">No info.</p>
+            {% endif %}
+            <a href="{% url 'todo:edit' todo.id %}" class="btn btn-primary">Edit</a>
+            {% if todo.todo_visible == True %}
+            <a href="{% url 'todo:edit' todo.id %}" class="btn btn-success">Close</a>
+            {% else %}
+            <a href="{% url 'todo:edit' todo.id %}" class="btn btn-warning">Reopen</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="d-flex justify-content-center my-3">
+    <div class="alert alert-info">Todoがありません</div>
+</div>
+{% endif %}
+{% endblock %}

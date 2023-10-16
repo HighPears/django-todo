@@ -1,0 +1,15 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Todo 削除{% endblock %}
+
+{% block content %}
+<form method="post">
+    <p>削除すると元には戻せません。本当に削除しますか？</p>
+    {% csrf_token %}
+    <button type="submit">削除</button>
+</form>
+
+<hr>
+
+<a href="{% url 'todo:index' %}">戻る</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'todo/base.html' %}
+
+{% block title %}Todo 追加{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">追加</button>
+</form>
+
+<hr>
+
+<a href="{% url 'todo:index' %}">戻る</a>
+{% endblock %}
